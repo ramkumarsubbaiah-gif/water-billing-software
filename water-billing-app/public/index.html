@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billing — Water Supply</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="brand">
+    <span class="droplet">💧</span>
+    <div>
+      <h1 id="shopNameHeader">Water Supply Shop</h1>
+      <div class="tagline">Billing Counter</div>
+    </div>
+  </div>
+  <nav class="app-nav">
+    <a href="/" class="active">Billing</a>
+    <a href="/reports.html">Reports</a>
+    <a href="/admin.html">Admin</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="billing-layout">
+
+    <!-- ================= PRODUCT SELECTION ================= -->
+    <div>
+      <div class="panel">
+        <div class="panel-title">🛒 Select Products</div>
+        <div class="category-tabs" id="categoryTabs">
+          <button class="category-tab active" data-cat="All">All</button>
+          <button class="category-tab" data-cat="Water">Water</button>
+          <button class="category-tab" data-cat="Cold Drink">Cold Drink</button>
+        </div>
+        <div id="productGrid" class="product-grid">
+          <div class="empty-state">Loading products...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= CART / PAYMENT ================= -->
+    <div class="cart-panel">
+      <div class="panel">
+        <div class="panel-title">🧾 Current Bill</div>
+
+        <div id="cartItems" class="cart-items">
+          <div class="empty-state">No items added yet.<br>Tap a product to add it.</div>
+        </div>
+
+        <div class="cart-totals">
+          <div class="total-row">
+            <span>Items</span>
+            <span id="itemCount">0</span>
+          </div>
+          <div class="total-row grand">
+            <span>Total</span>
+            <span id="grandTotal">₹0.00</span>
+          </div>
+        </div>
+
+        <div class="payment-toggle">
+          <button id="payCashBtn" class="active" data-mode="Cash">💵 Cash</button>
+          <button id="payQrBtn" data-mode="QR Code">📱 QR Code</button>
+        </div>
+
+        <div id="cashBox" class="cash-box">
+          <label for="amountGiven">Amount Given by Customer</label>
+          <input type="number" id="amountGiven" placeholder="e.g. 400" min="0" step="0.01">
+          <div id="balanceDisplay" class="balance-display hidden"></div>
+        </div>
+
+        <div id="qrBox" class="qr-box hidden">
+          <img id="qrImage" src="" alt="Scan to Pay QR code">
+          <p class="text-muted" style="font-size:12px; margin: 8px 0;">Scan with any UPI app to pay <strong id="qrAmountLabel">₹0.00</strong></p>
+          <label style="display:flex; align-items:center; gap:8px; justify-content:center; font-weight:600; font-size:13px;">
+            <input type="checkbox" id="qrPaidCheckbox" style="width:auto;"> Payment received / Mark as Paid
+          </label>
+        </div>
+
+        <button id="generateBillBtn" class="btn btn-primary btn-block btn-lg" disabled>Generate Bill</button>
+        <button id="clearCartBtn" class="btn btn-outline btn-block" style="margin-top:8px;">Clear Bill</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= RECEIPT MODAL ================= -->
+<div id="receiptOverlay" class="modal-overlay">
+  <div class="modal-box">
+    <div class="receipt" id="receiptContent">
+      <!-- filled by JS -->
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" id="closeReceiptBtn">Close</button>
+      <button class="btn btn-primary btn-block" onclick="window.print()">🖨️ Print Receipt</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/billing.js"></script>
+</body>
+</html>
